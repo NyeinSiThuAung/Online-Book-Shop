@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(228, 228, 228);
+    /* height: 400vh; */
+} 
+a,.nav-link,button.btn,p{
+    font-size: 18px;
+    font-family: 'Noto Serif TC', serif;
+}
+a,.nav-link{
+    color: orange;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Quicksand', sans-serif;
+}
+header h1{
+    text-shadow: 0.5px 0.5px 1px black;
+    font-size: 3.1rem;
+    color: white;
+}
+form input:focus,textarea:focus,select:focus{
+    box-shadow: none !important;
+    border: none !important;
+}
+textarea{
+    resize: none !important;
+}
+/* ------------header start--------------------- */
+header{
+    height: 100vh;
+    background-image:
+    linear-gradient(rgba(65, 65, 65, 0.4), rgba(65, 65, 65, 0.4)),
+    url(/css/img/reading_book.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+}
+header div.text{
+    position: absolute;
+    top: 38%;
+    left: 5%;
+}
+header button.btn{
+    color: white;
+    background-color: orange;
+    padding: 0.5rem 1rem;
+    border-radius: 10px 2px 2px;
+}
+/*---------------header end------------ */
+
+/* -------main--------- */
+main h2{
+    margin-top: 9rem;
+}
+main img.carousel-img-style{
+    width: 14.5%;
+    height: auto;
+    margin: 3rem 0.5rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+}
+main i{
+    font-size: 2.5rem;
+    color: rgb(251, 165, 4);
+}
+main button.carousel-control-prev,main button.carousel-control-next{
+    width: 2.5rem;
+}
+/* -------main end--------- */
