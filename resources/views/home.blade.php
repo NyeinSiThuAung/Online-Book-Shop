@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layout')
 
 @section('content')
 <header>
@@ -25,21 +25,22 @@
       </ul>
     <form class="d-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            @if(Auth::check())
+            @auth
             <li class="nav-item">
               <a class="nav-link" href="{{route('admin')}}">{{Auth::user()->name}}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('logOut')}}">Logout</a>
             </li>
-            @else
+            @endauth
+            @guest
               <li class="nav-item">
                 <a class="nav-link" href="/register">Register</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/login">LogIn</a>
               </li>
-            @endif
+            @endguest
         </ul>
     </form>
     </div>

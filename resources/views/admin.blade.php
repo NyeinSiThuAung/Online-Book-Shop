@@ -1,10 +1,10 @@
-@extends('layout')
+@extends('layouts.layout')
 @section('content')
 <div class="container">
-    <a href="/"><button class="btn btn-primary mt-4 mb-4">Back</button></a>
+    <a href="/" class="btn btn-primary mt-4 mb-4">Back</a>
     <div class="card">
     <div class="card-header">
-        <a href="{{route('admin.create')}}"><button class="btn btn-success mt-4 mb-4">Create</button></a>
+        <a href="{{route('admin.create')}}" class="btn btn-success mt-4 mb-4">Create</a>
     </div>
     <div class="card-body">
         @foreach($books as $book)
@@ -18,8 +18,8 @@
             </div>
             <div class="col-8">
                 <p class="card-text">{{$book->name}} <br><br> {{$book->category->name}} <br><br> {{$book->author->name}} <br><br>{{$book->price}} MMK <br><br>{{ \Illuminate\Support\Str::limit($book->description, 200, $end='...') }}</p>
-                <a href="{{ route('admin.show', [$book->id]) }}"><button class="btn btn-primary">Detail</button></a>
-                <a href="{{ route('admin.edit', [$book->id]) }}"><button class="btn btn-warning">Edit</button></a>
+                <a href="{{ route('admin.show', [$book->id]) }}" class="btn btn-primary">Detail</a>
+                <a href="{{ route('admin.edit', [$book->id]) }}" class="btn btn-warning">Edit</a>
                 <form action="{{ route('admin.destroy', [$book->id]) }}" class="d-inline-block" method="post">
                     @csrf
                     @method('DELETE')

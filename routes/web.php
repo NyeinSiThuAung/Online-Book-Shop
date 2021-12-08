@@ -30,10 +30,6 @@ Route::resource('admin', AdminController::class)->names([
 ]);
 
 Route::get('/home', [App\Http\Controllers\LogOutController::class, 'index'])->name('logOut');
-
-Auth::routes();
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/cateStore', [App\Http\Controllers\CategoryStoreController::class, 'storeCategory'])->name('cateStore');
+Route::post('/authorStore', [App\Http\Controllers\CategoryStoreController::class, 'storeAuthor'])->name('authorStore');
+Auth::routes(['reset' => false]);

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layout')
 @section('content')
 <div class="container mt-4">
     <a href="{{route('admin')}}"><button class="btn btn-primary mb-4">Back</button></a>

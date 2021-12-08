@@ -7,9 +7,8 @@
 }
 body{
     background-color: rgb(228, 228, 228);
-    /* height: 400vh; */
 } 
-a,.nav-link,button.btn,p{
+a,a.btn,.nav-link,button.btn,p{
     font-size: 18px;
     font-family: 'Noto Serif TC', serif;
 }
@@ -26,7 +25,6 @@ header h1{
 }
 form input:focus,textarea:focus,select:focus{
     box-shadow: none !important;
-    border: none !important;
 }
 textarea{
     resize: none !important;

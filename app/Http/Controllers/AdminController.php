@@ -55,7 +55,7 @@ class AdminController extends Controller
         }else{
             Book::create($validatedData + ['description' => 'No description yet']);
         }
-        return redirect()->route('admin')->with('create', 'Created Successfully!');
+        return redirect()->route('admin.create')->with('create', 'Created Successfully!');
     }
 
     /**
@@ -104,7 +104,7 @@ class AdminController extends Controller
             $deleteImgPath = "images/". $admin->image;
             File::delete($deleteImgPath);
             // end
-            $ImgName = $this->moveImg($request->image);
+            $imgName = $this->moveImg($request->image);
             $inputData['image'] = "$imgName";
         }
         $admin->update($inputData);
