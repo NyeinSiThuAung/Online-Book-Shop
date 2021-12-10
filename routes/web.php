@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdminController;
 
@@ -15,9 +16,7 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::resource('admin', AdminController::class)->names([
     'index' => 'admin',
@@ -29,7 +28,7 @@ Route::resource('admin', AdminController::class)->names([
     'edit' => 'admin.edit',
 ]);
 
-Route::get('/home', [App\Http\Controllers\LogOutController::class, 'index'])->name('logOut');
+Route::get('/logOut', [App\Http\Controllers\LogOutController::class, 'index'])->name('logOut');
 Route::post('/cateStore', [App\Http\Controllers\CategoryStoreController::class, 'storeCategory'])->name('cateStore');
 Route::post('/authorStore', [App\Http\Controllers\CategoryStoreController::class, 'storeAuthor'])->name('authorStore');
 Auth::routes(['reset' => false]);

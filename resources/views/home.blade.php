@@ -2,15 +2,15 @@
 
 @section('content')
 <header>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg nav-waypoint">
   <div class="container">
-    <a class="navbar-brand flex-grow-1" href="#"><img src="/css/img/header_icon.png" alt="" height="50" width="50"></a>
+    <a class="navbar-brand flex-grow-1" href="#"><img src="/css/img/header_icon.png" alt="" height="45" width="45"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item active-link">
           <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
@@ -23,11 +23,15 @@
           <a class="nav-link" href="#">Category</a>
         </li>
       </ul>
-    <form class="d-flex">
+    <div class="d-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             @auth
             <li class="nav-item">
+              @if(Auth::user()->admin_id)
               <a class="nav-link" href="{{route('admin')}}">{{Auth::user()->name}}</a>
+              @else
+              <p class="nav-link" style="cursor:default">{{Auth::user()->name}}</p>
+              @endif
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('logOut')}}">Logout</a>
@@ -42,7 +46,7 @@
               </li>
             @endguest
         </ul>
-    </form>
+    </div>
     </div>
   </div>
 </nav>
@@ -54,7 +58,7 @@
     </form>
 </div>
 </header>
-<main class="container">
+<main class="container" id="navScroll">
   <h2 class="text-center">Trending post</h2>
   <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
     <div class="carousel-inner">
@@ -95,5 +99,20 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  <script>
+    const navWaypoint = new Waypoint({
+    element: document.getElementById('navScroll'),
+    handler: function(direction) {
+        if(direction === "down"){
+          document.getElementsByClassName('nav-waypoint')[0].classList.add("fixed-top");
+          document.getElementsByClassName('nav-waypoint')[0].classList.add("bg-color");
+        }else{
+          document.getElementsByClassName('nav-waypoint')[0].classList.remove("fixed-top");
+          document.getElementsByClassName('nav-waypoint')[0].classList.remove("bg-color");
+        }
+    },
+    offset: '32%'
+  })
+  </script>
 </main>
 @endsection

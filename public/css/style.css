@@ -3,9 +3,10 @@
     padding: 0;
     outline: none;
     border: none;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 body{
+    height: 400vh;
     background-color: rgb(228, 228, 228);
 } 
 a,a.btn,.nav-link,button.btn,p{
@@ -15,13 +16,11 @@ a,a.btn,.nav-link,button.btn,p{
 a,.nav-link{
     color: orange;
 }
+a:hover,.nav-link:hover{
+    color: rgb(224, 94, 46);
+}
 h1,h2,h3,h4,h5,h6{
     font-family: 'Quicksand', sans-serif;
-}
-header h1{
-    text-shadow: 0.5px 0.5px 1px black;
-    font-size: 3.1rem;
-    color: white;
 }
 form input:focus,textarea:focus,select:focus{
     box-shadow: none !important;
@@ -33,7 +32,7 @@ textarea{
 header{
     height: 100vh;
     background-image:
-    linear-gradient(rgba(65, 65, 65, 0.4), rgba(65, 65, 65, 0.4)),
+    linear-gradient(rgba(29, 29, 29, 0.7), rgba(133, 131, 131, 0.3)),
     url(/css/img/reading_book.jpeg);
     background-position: center;
     background-repeat: no-repeat;
@@ -41,16 +40,34 @@ header{
     background-size: cover;
     position: relative;
 }
+
+header h1{
+    text-shadow: 0.5px 0.5px 1px black;
+    font-size: 3.1rem;
+    color: white;
+}
+
 header div.text{
     position: absolute;
     top: 38%;
     left: 5%;
 }
+
 header button.btn{
     color: white;
+    /* color: rgb(49, 49, 49); */
     background-color: orange;
     padding: 0.5rem 1rem;
     border-radius: 10px 2px 2px;
+}
+header ul li.active-link{
+    border-radius: 10px !important;
+    background-color: rgb(49, 49, 49) !important;
+}
+
+header nav.bg-color{
+    background-color: rgb(240, 231, 208);
+    box-shadow: 0 4px 2px -2px rgb(201, 199, 199);
 }
 /*---------------header end------------ */
 
@@ -73,3 +90,6 @@ main button.carousel-control-prev,main button.carousel-control-next{
     width: 2.5rem;
 }
 /* -------main end--------- */
+
+/* ----------waypoint------------ */
+/* ----------endWaypoint------------ */

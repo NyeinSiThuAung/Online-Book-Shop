@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Admin;
 use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -16,12 +17,9 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
+        $this->authorize('viewAny',Admin::class);
         $books = Book::orderBy('id','desc')->get();
         return view('admin',compact('books'));
     }
@@ -33,6 +31,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+        $this->authorize('creat',Admin::class);
         $categories = Category::all();
         $authors = Author::all();
         return view('create',compact('categories','authors'));
@@ -46,6 +45,7 @@ class AdminController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
+        $this->authorize('creat',Admin::class);
         $validatedData = $request->validated();
         $imgName = $this->moveImg($request->image);
         $validatedData['image'] = "$imgName";
@@ -77,6 +77,7 @@ class AdminController extends Controller
      */
     public function edit(Book $admin)
     {
+        $this->authorize('update',Admin::class);
         $categories = Category::all();
         $authors = Author::all();
         return view('edit', compact('admin','categories','authors'));
@@ -91,6 +92,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, Book $admin)
     {
+        $this->authorize('update',Admin::class);
         $request->validate([
             'name' => 'required|max:255',
             'price' => 'required',
@@ -119,6 +121,7 @@ class AdminController extends Controller
      */
     public function destroy(Book $admin)
     {
+        $this->authorize('delete',Admin::class);
         $admin->delete();
         return redirect()->route('admin');
     }
