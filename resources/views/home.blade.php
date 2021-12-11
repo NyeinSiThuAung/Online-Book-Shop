@@ -59,45 +59,37 @@
 </div>
 </header>
 <main class="container" id="navScroll">
-  <h2 class="text-center">Trending post</h2>
-  <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="d-flex justify-content-center">
-          <img src="css/img/book1.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book2.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book3.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book1.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book2.jpg" class="d-inline-block carousel-img-style" alt="...">
+  <div class="best-selling">
+  <h2 class="text-center pt-4" id="test">Best Selling Books</h2>
+    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="text-center">
+            @foreach($fBooks as $fBook)
+            <a href="{{ route('admin.show', [$fBook->id]) }}"><img src="/images/{{$fBook->image}}" class="d-inline-block carousel-img-style" alt="..."></a>
+            @endforeach
+          </div>
         </div>
-      </div>
-      <div class="carousel-item">
-        <div class="d-flex justify-content-center">
-          <img src="css/img/book1.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book2.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book3.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book1.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book2.jpg" class="d-inline-block carousel-img-style" alt="...">
+        @if($sBooks != [])
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center">
+            @foreach($sBooks as $sBook)
+            <img src="images/{{$sBook->image}}" class="d-inline-block carousel-img-style" alt="...">
+            @endforeach
+          </div>
         </div>
+        @endif
       </div>
-      <div class="carousel-item">
-        <div class="d-flex justify-content-center">
-          <img src="css/img/book1.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book2.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book3.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book1.jpg" class="d-inline-block carousel-img-style" alt="...">
-          <img src="css/img/book2.jpg" class="d-inline-block carousel-img-style" alt="...">
-        </div>
-      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+        <i class="fas fa-chevron-circle-left"  aria-hidden="true"></i>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+        <i class="fas fa-chevron-circle-right"  aria-hidden="true"></i>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-      <i class="fas fa-chevron-circle-left"  aria-hidden="true"></i>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-      <i class="fas fa-chevron-circle-right"  aria-hidden="true"></i>
-      <span class="visually-hidden">Next</span>
-    </button>
+    <div class="text-center"><button class="btn btn-warning mb-4">View All</button></div>
   </div>
   <script>
     const navWaypoint = new Waypoint({

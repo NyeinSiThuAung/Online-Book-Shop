@@ -53,7 +53,7 @@ class AdminPolicy
      */
     public function update(User $user, Admin $admin)
     {
-        $user->admin_id === $admin->id;
+        return $user->admin_id == $admin->id;
     }
 
     /**
@@ -65,7 +65,7 @@ class AdminPolicy
      */
     public function delete(User $user, Admin $admin)
     {
-        $user->admin_id === $admin->id;
+        return $user->admin_id == $admin->id;
     }
 
     /**

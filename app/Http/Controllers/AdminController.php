@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use App\Models\Admin;
 use App\Models\Author;
 use App\Models\Category;
@@ -31,7 +32,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $this->authorize('creat',Admin::class);
+        $this->authorize('create',Admin::class);
         $categories = Category::all();
         $authors = Author::all();
         return view('create',compact('categories','authors'));
@@ -45,7 +46,7 @@ class AdminController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $this->authorize('creat',Admin::class);
+        $this->authorize('create',Admin::class);
         $validatedData = $request->validated();
         $imgName = $this->moveImg($request->image);
         $validatedData['image'] = "$imgName";
@@ -77,7 +78,8 @@ class AdminController extends Controller
      */
     public function edit(Book $admin)
     {
-        $this->authorize('update',Admin::class);
+        // $this->authorize('update',Admin::findOrFail(1)->id);
+        $this->authorize('update', Admin::find(1));
         $categories = Category::all();
         $authors = Author::all();
         return view('edit', compact('admin','categories','authors'));
@@ -92,7 +94,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, Book $admin)
     {
-        $this->authorize('update',Admin::class);
+        $this->authorize('update', Admin::find(1));
         $request->validate([
             'name' => 'required|max:255',
             'price' => 'required',
@@ -101,7 +103,7 @@ class AdminController extends Controller
         ]);
         $inputData = $request->all();
         if($request->image){
-            $request->validate(['image' => 'required|image|mimes:jpeg,png,jpg,gif,svg']);
+            $request->validate(['image' => 'required|image']);
             // delete image section
             $deleteImgPath = "images/". $admin->image;
             File::delete($deleteImgPath);
@@ -121,7 +123,7 @@ class AdminController extends Controller
      */
     public function destroy(Book $admin)
     {
-        $this->authorize('delete',Admin::class);
+        $this->authorize('delete', Admin::find(1));
         $admin->delete();
         return redirect()->route('admin');
     }
