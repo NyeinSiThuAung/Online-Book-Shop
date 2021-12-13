@@ -21,8 +21,9 @@ class HomeController extends Controller
     public function index()
     {
         $fBooks =Book::limit(4)->get();
-        $sBooks = Book::limit(5)->offset(4)->get();
+        $sBooks = Book::limit(4)->offset(4)->get();
+        $tBooks = Book::limit(4)->offset(8)->get();
         // dd($sBooks);
-        return view('home',compact('fBooks','sBooks'));
+        return view('home',compact('fBooks','sBooks','tBooks'));
     }
 }

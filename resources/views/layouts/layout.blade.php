@@ -13,7 +13,5 @@
     <link rel="shortcut icon" href="/css/img/icon.png" type="image/x-icon">
     <title>Book</title>
 </head>
-<body>
     @yield('content')
-</body>
 </html>

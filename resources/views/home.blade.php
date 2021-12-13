@@ -1,6 +1,28 @@
 @extends('layouts.layout')
 
 @section('content')
+<body onload="myFunction(['bestSelling', 'recentUpload', 'recentPopular'], ['Best Selling Books', 'Recent Upload Books', 'Recent Popular Books'])">
+<aside>
+  <i class="fas fa-times mt-4 me-3 fs-5 d-block float-end faTimesIcon"></i>
+  <div class="text-center mt-3">
+  <i class="fas fa-shopping-bag fs-4 me-3" style="cursor:default"></i><h4 class="d-inline-block">Your item</h4>
+  </div>
+  <div class="container mt-5">
+    <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <img src="images/20211211090245.png" alt="" width="100" height="100">
+      </div>
+      <div class="col-8"><h5 class="ps-2">လေလွင့်သူ</h5><p class="ps-2 pt-2">4000Ks</p></div>
+      <div class="col-1">
+        <i class="far fa-trash-alt"></i>
+      </div> 
+    </div>
+    <hr>
+    </div>
+  </div>
+</aside>
+<aside class="asideLeft"></aside>
 <header>
   <nav class="navbar navbar-expand-lg nav-waypoint">
   <div class="container">
@@ -23,88 +45,120 @@
           <a class="nav-link" href="#">Category</a>
         </li>
       </ul>
-    <div class="d-flex">
+      <div class="d-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            @auth
+          @auth
+          <li class="nav-item">
+            @if(Auth::user()->admin_id)
+            <a class="nav-link" href="{{route('admin')}}">{{Auth::user()->name}}</a>
+            @else
+            <p class="nav-link" style="cursor:default">{{Auth::user()->name}}</p>
+            @endif
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('logOut')}}">Logout</a>
+          </li>
+          @endauth
+          @guest
             <li class="nav-item">
-              @if(Auth::user()->admin_id)
-              <a class="nav-link" href="{{route('admin')}}">{{Auth::user()->name}}</a>
-              @else
-              <p class="nav-link" style="cursor:default">{{Auth::user()->name}}</p>
-              @endif
+              <a class="nav-link" href="/register">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('logOut')}}">Logout</a>
+              <a class="nav-link" href="/login">LogIn</a>
             </li>
-            @endauth
-            @guest
-              <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/login">LogIn</a>
-              </li>
-            @endguest
+          @endguest
+          <li class="nav-item ms-1 cartIcon">
+            <span class="nav-link">
+              <div style="position:relative">
+                <i class="fas fa-shopping-cart"></i>
+                <span style="position:absolute;top:-50%;font-size:0.9rem;border-radius:50%;background-color:#FF8353;padding:0 35%;color:rgb(49, 49, 49)" class="cartCountNo"></span>
+              </div>
+            </span>
+          </li>
         </ul>
-    </div>
+      </div>
     </div>
   </div>
 </nav>
 <div class="text">
-    <h1>Get Your Books With <br> The Best Price</h1>
+    <h1 id="testWp">Get Your Books With <br> The Best Price</h1>
     <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search">
         <button class="btn" type="submit">Search</button>
     </form>
 </div>
 </header>
-<main class="container" id="navScroll">
-  <div class="best-selling">
-  <h2 class="text-center pt-4" id="test">Best Selling Books</h2>
-    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="text-center">
-            @foreach($fBooks as $fBook)
-            <a href="{{ route('admin.show', [$fBook->id]) }}"><img src="/images/{{$fBook->image}}" class="d-inline-block carousel-img-style" alt="..."></a>
-            @endforeach
+<main class="container" id="navScrollWp">
+  <div class="bestSelling" id="test"></div>
+  <div class="recentUpload"></div>
+  <div class="recentPopular"></div>
+</main> 
+<script>
+// Show Main Content 
+
+function myFunction(sectionClassName, h2Text) {
+  for(let i = 0; i < sectionClassName.length; i++){
+    document.getElementsByClassName(sectionClassName[i])[0].innerHTML += `
+  <h2 class="text-center pt-4">${h2Text[i]}</h2>
+      <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="d-flex justify-content-center mb-5">
+              @foreach($fBooks as $fBook)
+                <div class="test">
+                  <a href="{{ route('admin.show', [$fBook->id]) }}"><img src="/images/{{$fBook->image}}" class="carousel-img-style" alt="..."></a>
+                  <div class="text-center">
+                    <button class="btn addCartButton">Add to Cart</button>
+                    <button class="btn buyButton">Buy</button>
+                  </div>
+                </div>
+              @endforeach
+            </div>
           </div>
-        </div>
-        @if($sBooks != [])
-        <div class="carousel-item">
-          <div class="d-flex justify-content-center">
-            @foreach($sBooks as $sBook)
-            <img src="images/{{$sBook->image}}" class="d-inline-block carousel-img-style" alt="...">
-            @endforeach
+          @if(count($sBooks) > 0)
+          <div class="carousel-item">
+            <div class="d-flex justify-content-center mb-5">
+              @foreach($sBooks as $sBook)
+                <div class="test">
+                  <a href="{{ route('admin.show', [$sBook->id]) }}"><img src="/images/{{$sBook->image}}" class="carousel-img-style" alt="..."></a>
+                  <div class="text-center">
+                    <button class="btn addCartButton">Add to Cart</button>
+                    <button class="btn buyButton">Buy</button>
+                  </div>
+                </div>
+              @endforeach
+            </div>
           </div>
+          @endif
+          @if(count($tBooks) > 0)
+          <div class="carousel-item">
+            <div class="d-flex justify-content-center mb-5">
+              @foreach($tBooks as $tBook)
+                <div class="test">
+                  <a href="{{ route('admin.show', [$tBook->id]) }}"><img src="/images/{{$tBook->image}}" class="carousel-img-style" alt="..."></a>
+                  <div class="text-center">
+                    <button class="btn addCartButton">Add to Cart</button>
+                    <button class="btn buyButton">Buy</button>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+          @endif
         </div>
-        @endif
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+          <i class="fas fa-chevron-circle-left"  aria-hidden="true"></i>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+          <i class="fas fa-chevron-circle-right"  aria-hidden="true"></i>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-        <i class="fas fa-chevron-circle-left"  aria-hidden="true"></i>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-        <i class="fas fa-chevron-circle-right"  aria-hidden="true"></i>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    <div class="text-center"><button class="btn btn-warning mb-4">View All</button></div>
-  </div>
-  <script>
-    const navWaypoint = new Waypoint({
-    element: document.getElementById('navScroll'),
-    handler: function(direction) {
-        if(direction === "down"){
-          document.getElementsByClassName('nav-waypoint')[0].classList.add("fixed-top");
-          document.getElementsByClassName('nav-waypoint')[0].classList.add("bg-color");
-        }else{
-          document.getElementsByClassName('nav-waypoint')[0].classList.remove("fixed-top");
-          document.getElementsByClassName('nav-waypoint')[0].classList.remove("bg-color");
-        }
-    },
-    offset: '32%'
-  })
-  </script>
-</main>
+      <div class="text-center"><button class="btn btn-warning mb-4">View More</button></div>`;
+  }
+}
+</script>
+<script src="/js/javascript.js"></script>
+</body>
 @endsection
