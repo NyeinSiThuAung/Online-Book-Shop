@@ -111,6 +111,7 @@ aside{
     top: 0;
     right: 0;
     z-index: 1;
+    overflow: auto;
 }
 aside.asideLeft{
     width: 73%;

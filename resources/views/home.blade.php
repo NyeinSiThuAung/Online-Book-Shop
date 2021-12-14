@@ -8,16 +8,7 @@
   <i class="fas fa-shopping-bag fs-4 me-3" style="cursor:default"></i><h4 class="d-inline-block">Your item</h4>
   </div>
   <div class="container mt-5">
-    <div class="container">
-    <div class="row">
-      <div class="col-3">
-        <img src="images/20211211090245.png" alt="" width="100" height="100">
-      </div>
-      <div class="col-8"><h5 class="ps-2">လေလွင့်သူ</h5><p class="ps-2 pt-2">4000Ks</p></div>
-      <div class="col-1">
-        <i class="far fa-trash-alt"></i>
-      </div> 
-    </div>
+    <div class="container" id="showCart">
     <hr>
     </div>
   </div>
@@ -92,7 +83,7 @@
   <div class="bestSelling" id="test"></div>
   <div class="recentUpload"></div>
   <div class="recentPopular"></div>
-</main> 
+</main>
 <script>
 // Show Main Content 
 
@@ -105,10 +96,13 @@ function myFunction(sectionClassName, h2Text) {
           <div class="carousel-item active">
             <div class="d-flex justify-content-center mb-5">
               @foreach($fBooks as $fBook)
-                <div class="test">
+                <div>
                   <a href="{{ route('admin.show', [$fBook->id]) }}"><img src="/images/{{$fBook->image}}" class="carousel-img-style" alt="..."></a>
                   <div class="text-center">
-                    <button class="btn addCartButton">Add to Cart</button>
+                    <input type="hidden" value="{{ $fBook->name }}" name="name">
+                    <input type="hidden" value="{{ $fBook->price }}" name="price">
+                    <input type="hidden" value="{{ $fBook->image }}"  name="image">
+                    <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
                     <button class="btn buyButton">Buy</button>
                   </div>
                 </div>
@@ -119,10 +113,13 @@ function myFunction(sectionClassName, h2Text) {
           <div class="carousel-item">
             <div class="d-flex justify-content-center mb-5">
               @foreach($sBooks as $sBook)
-                <div class="test">
+                <div>
                   <a href="{{ route('admin.show', [$sBook->id]) }}"><img src="/images/{{$sBook->image}}" class="carousel-img-style" alt="..."></a>
                   <div class="text-center">
-                    <button class="btn addCartButton">Add to Cart</button>
+                    <input type="hidden" value="{{ $sBook->name }}" name="name">
+                    <input type="hidden" value="{{ $sBook->price }}" name="price">
+                    <input type="hidden" value="{{ $sBook->image }}"  name="image">
+                    <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
                     <button class="btn buyButton">Buy</button>
                   </div>
                 </div>
@@ -134,10 +131,13 @@ function myFunction(sectionClassName, h2Text) {
           <div class="carousel-item">
             <div class="d-flex justify-content-center mb-5">
               @foreach($tBooks as $tBook)
-                <div class="test">
+                <div>
                   <a href="{{ route('admin.show', [$tBook->id]) }}"><img src="/images/{{$tBook->image}}" class="carousel-img-style" alt="..."></a>
                   <div class="text-center">
-                    <button class="btn addCartButton">Add to Cart</button>
+                    <input type="hidden" value="{{ $tBook->name }}" name="name">
+                    <input type="hidden" value="{{ $tBook->price }}" name="price">
+                    <input type="hidden" value="{{ $tBook->image }}"  name="image">
+                    <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
                     <button class="btn buyButton">Buy</button>
                   </div>
                 </div>
