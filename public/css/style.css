@@ -84,28 +84,27 @@ main img.carousel-img-style{
     box-shadow: 0 5px 7px -2px rgb(201, 199, 199);
     margin-top: 9rem;
 }
+i{
+    color: rgb(255, 166, 0);
+}
 main i{
     font-size: 2.5rem;
-    color: rgb(255, 166, 0);
 }
 main button.carousel-control-prev,main button.carousel-control-next{
     width: 2.5rem;
 }
-main .addCartButton,main .buyButton{
+main .addCartButton, main .orderButton{
     background-color: rgba(49, 49, 49,0.5)!important;
     color: white;
 
 }
-/* main .buyButton{
-    width:35%;
-} */
 /* -------main end--------- */
 
 /* ----------aside------------ */
 aside{
     width: 27%;
     height: 100vh;
-    background-color: orange;
+    background-color: rgb(255, 242, 216);
     display: none;
     position: fixed;
     top: 0;
@@ -121,3 +120,6 @@ aside.asideLeft{
     opacity: 0.7;
 }
 /* ----------end aside------------ */
+aside a{
+    text-decoration:none;
+}

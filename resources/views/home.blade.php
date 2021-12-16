@@ -5,11 +5,14 @@
 <aside>
   <i class="fas fa-times mt-4 me-3 fs-5 d-block float-end faTimesIcon"></i>
   <div class="text-center mt-3">
-  <i class="fas fa-shopping-bag fs-4 me-3" style="cursor:default"></i><h4 class="d-inline-block">Your item</h4>
+    <i class="fas fa-shopping-bag fs-4 me-3" style="cursor:default"></i><h4 class="d-inline-block">Your item</h4>
+    <div class="text-center">
+      <button class="btn btn-warning text-light mt-4 mb-4">Order</button>
+    </div>
   </div>
-  <div class="container mt-5">
+  <div class="container mt-3">
     <div class="container" id="showCart">
-    <hr>
+      <hr>
     </div>
   </div>
 </aside>
@@ -62,7 +65,7 @@
             <span class="nav-link">
               <div style="position:relative">
                 <i class="fas fa-shopping-cart"></i>
-                <span style="position:absolute;top:-50%;font-size:0.9rem;border-radius:50%;background-color:#FF8353;padding:0 35%;color:rgb(49, 49, 49)" class="cartCountNo"></span>
+                <span style="position:absolute;top:-50%;font-size:0.9rem;border-radius:50%;background-color:#FF8353;padding:0 35%;color:rgb(49, 49, 49)" class="cartCountNo">0</span>
               </div>
             </span>
           </li>
@@ -80,7 +83,7 @@
 </div>
 </header>
 <main class="container" id="navScrollWp">
-  <div class="bestSelling" id="test"></div>
+  <div class="bestSelling"></div>
   <div class="recentUpload"></div>
   <div class="recentPopular"></div>
 </main>
@@ -103,7 +106,7 @@ function myFunction(sectionClassName, h2Text) {
                     <input type="hidden" value="{{ $fBook->price }}" name="price">
                     <input type="hidden" value="{{ $fBook->image }}"  name="image">
                     <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                    <button class="btn buyButton">Buy</button>
+                    <button class="btn orderButton">Order</button>
                   </div>
                 </div>
               @endforeach
@@ -120,7 +123,7 @@ function myFunction(sectionClassName, h2Text) {
                     <input type="hidden" value="{{ $sBook->price }}" name="price">
                     <input type="hidden" value="{{ $sBook->image }}"  name="image">
                     <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                    <button class="btn buyButton">Buy</button>
+                    <button class="btn orderButton">Order</button>
                   </div>
                 </div>
               @endforeach
@@ -138,7 +141,7 @@ function myFunction(sectionClassName, h2Text) {
                     <input type="hidden" value="{{ $tBook->price }}" name="price">
                     <input type="hidden" value="{{ $tBook->image }}"  name="image">
                     <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                    <button class="btn buyButton">Buy</button>
+                    <button class="btn orderButton">Order</button>
                   </div>
                 </div>
               @endforeach

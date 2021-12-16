@@ -16,56 +16,84 @@ offset: '32%'
 
 // Add Cart Number
 
-// const addCartButton = document.querySelectorAll('.addCartButton');
 const asideTag = document.getElementsByTagName('aside');
-// cart counter no
-let counter = 0;
-// for(let i = 0; i < addCartButton.length; i++){
-//     addCartButton[i].addEventListener('click',function(){
-//         counter ++;
-//         document.getElementsByClassName('cartCountNo')[0].innerHTML = counter;
-//     });
-// }
+let lsCounter = 0; // ls = localStorage
+let cartItemCounter = 0;
+let showCart = document.getElementById('showCart');
+let cartCountInner = document.getElementsByClassName('cartCountNo')[0];
 function addToCartFunction(event){
-    counter ++;
-    document.getElementsByClassName('cartCountNo')[0].innerHTML = counter;
     let addedCartItem = event.target.parentElement.childNodes;
     let title = addedCartItem[1].value;
     let price = addedCartItem[3].value;
     let image = addedCartItem[5].value;
-    
-    let showCart = document.getElementById('showCart');
-    let createdRowDiv = addToCartReuseFunction("createRowDiv","div","row", showCart);
-    
-    let createdImgDiv = addToCartReuseFunction("createImgDiv", "div", "col-3", createdRowDiv);
 
-    let createdImgTag = addToCartReuseFunction("createImgTag", "img", "addedCartImg", createdImgDiv);
-    createdImgTag.src = "images/" + image;
-    createdImgTag.width = "100";
+    lsCounter++;
+    cartItemCounter++;
+    localStorage.setItem('title'+lsCounter, title);
+    localStorage.setItem('price'+lsCounter, price);
+    localStorage.setItem('image'+lsCounter, image);
+    localStorage.setItem('lsCounter',lsCounter);
+    localStorage.setItem('cartItemCounter',cartItemCounter);
     
-    let createdTitleDiv = addToCartReuseFunction("createTitleDiv", "div", "col-8", createdRowDiv);
-    let createdTitleTag = addToCartReuseFunction("createTitleDiv", "h5", "ps-2", createdTitleDiv);
-    createdTitleTag.innerHTML = title;
-    let createdPriceTag = addToCartReuseFunction("createPriceTag", "p", "ps-2", createdTitleDiv);
-    createdPriceTag.classList.add('pt-2');
-    createdPriceTag.innerHTML = price;
-    
-    let createdTrashIconDiv = addToCartReuseFunction("createTrashIconDiv", "div", "col-1", createdRowDiv);
-    let creatTrashIconTag = addToCartReuseFunction("creatTrashIconTag", "i", "far", createdTrashIconDiv);
-    creatTrashIconTag.classList.add('fa-trash-alt');
-    
-    let creatHrTag = document.createElement('hr');
-    document.getElementById('showCart').append(creatHrTag);
-    
+    addToCartLocalStorageReuseFunction(lsCounter);
 }
-
+lsCounter = localStorage.getItem('lsCounter');
+cartItemCounter = localStorage.getItem('cartItemCounter');
+window.addEventListener('load', () => {
+    if(localStorage.getItem('cartItemCounter') == 0){
+        localStorage.removeItem('lsCounter');
+        localStorage.removeItem('cartItemCounter');
+        return ;
+    }
+    let numberLsCounter = Number(lsCounter);
+    for(let i = 1; i <= numberLsCounter; i++){
+        if(!localStorage.getItem('title'+i)){
+            continue;
+        }
+        addToCartLocalStorageReuseFunction(i);
+    }
+})
 function addToCartReuseFunction (createParam,tagNameParam,classNameParam,appendParam){
     createParam = document.createElement(tagNameParam);
     createParam.classList.add(classNameParam);
     appendParam.append(createParam);
     return createParam;
 }
+function addToCartLocalStorageReuseFunction(param){
+    cartCountInner.innerHTML = localStorage.getItem('cartItemCounter');
+    let createdRowDiv = addToCartReuseFunction("createRowDiv","div","row", showCart);
+    
+    let createdImgDiv = addToCartReuseFunction("createImgDiv", "div", "col-3", createdRowDiv);
 
+    let createdImgTag = addToCartReuseFunction("createImgTag", "img", "addedCartImg", createdImgDiv);
+    createdImgTag.src = "images/" + localStorage.getItem('image'+param);
+    createdImgTag.width = "100";
+    
+    let createdTitleDiv = addToCartReuseFunction("createTitleDiv", "div", "col-8", createdRowDiv);
+    let createdTitleTag = addToCartReuseFunction("createTitleDiv", "h5", "ps-2", createdTitleDiv);
+    createdTitleTag.innerHTML = localStorage.getItem('title'+param);
+    let createdPriceTag = addToCartReuseFunction("createPriceTag", "p", "ps-2", createdTitleDiv);
+    createdPriceTag.classList.add('pt-2');
+    createdPriceTag.innerHTML = localStorage.getItem('price'+param);
+    
+    let createdTrashIconDiv = addToCartReuseFunction("createTrashIconDiv", "div", "col-1", createdRowDiv);
+    let creatTrashIconTag = addToCartReuseFunction("creatTrashIconTag", "i", "far", createdTrashIconDiv);
+    creatTrashIconTag.classList.add('fa-trash-alt');
+    creatTrashIconTag.addEventListener('click',() => {
+        localStorage.removeItem('title'+param);
+        localStorage.removeItem('price'+param);
+        localStorage.removeItem('image'+param);
+        createdRowDiv.style.display = "none";
+        creatHrTag.style.display = "none";
+        cartItemCounter--;
+        localStorage.setItem('cartItemCounter',cartItemCounter);
+        cartItemCounter = localStorage.getItem('cartItemCounter');
+        cartCountInner.innerHTML = localStorage.getItem('cartItemCounter');
+    })
+    
+    let creatHrTag = document.createElement('hr');
+    document.getElementById('showCart').append(creatHrTag);
+}
 // show cart list
 document.getElementsByClassName('cartIcon')[0].addEventListener('click',function(){
     ShowReuseCartFunction("block", "-1", "none");

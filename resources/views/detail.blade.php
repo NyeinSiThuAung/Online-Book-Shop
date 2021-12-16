@@ -2,16 +2,7 @@
 @section('content')
 <body>
 <div class="container mt-4">
-    @auth
-    @if(Auth::user()->admin_id)
-    <a href="{{route('admin')}}"><button class="btn btn-primary mb-4">Back</button></a>
-    @else
-    <a href="{{route('home')}}/#test"><button class="btn btn-primary mb-4">Back</button></a>
-    @endif
-    @endauth
-    @guest
-    <a href="{{route('home')}}/#test"><button class="btn btn-primary mb-4">Back</button></a>
-    @endguest
+    <button class="btn btn-primary mb-4" onclick="history.back()">Back</button>
     <div class="row bg-light rounded p-3">
         <div class="col-2">
             <img src="/images/{{$admin->image}}" alt="" class="mb-3 rounded" width="200">
