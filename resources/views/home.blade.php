@@ -7,7 +7,7 @@
   <div class="text-center mt-3">
     <i class="fas fa-shopping-bag fs-4 me-3" style="cursor:default"></i><h4 class="d-inline-block">Your item</h4>
     <div class="text-center">
-      <button class="btn btn-warning text-light mt-4 mb-4">Order</button>
+      <button class="btn btn-warning text-light mt-3 mb-3" onclick="window.location.href='{{ route('cartItemOrder') }}'">Order</button>
     </div>
   </div>
   <div class="container mt-3">

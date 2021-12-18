@@ -32,3 +32,7 @@ Route::get('/logOut', [App\Http\Controllers\LogOutController::class, 'index'])->
 Route::post('/cateStore', [App\Http\Controllers\CategoryStoreController::class, 'storeCategory'])->name('cateStore');
 Route::post('/authorStore', [App\Http\Controllers\CategoryStoreController::class, 'storeAuthor'])->name('authorStore');
 Auth::routes(['reset' => false]);
+
+Route::get('/cartItemOrder',function() {
+    return view('order.cartItemOrder');
+})->name('cartItemOrder');

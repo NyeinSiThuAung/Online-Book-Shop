@@ -1,8 +1,10 @@
 // Nav Waypoint
 
+// const { create } = require("lodash");
+
 const navWaypoint = new Waypoint({
 element: document.getElementById('navScrollWp'),
-handler: function(direction) {
+handler: (direction) => {
     if(direction === "down"){
         document.getElementsByClassName('nav-waypoint')[0].classList.add("fixed-top");
         document.getElementsByClassName('nav-waypoint')[0].classList.add("bg-color");
@@ -14,14 +16,14 @@ handler: function(direction) {
 offset: '32%'
 })
 
-// Add Cart Number
+// Add Cart in Aside Bar
 
 const asideTag = document.getElementsByTagName('aside');
 let lsCounter = 0; // ls = localStorage
 let cartItemCounter = 0;
 let showCart = document.getElementById('showCart');
 let cartCountInner = document.getElementsByClassName('cartCountNo')[0];
-function addToCartFunction(event){
+addToCartFunction = (event) => {
     let addedCartItem = event.target.parentElement.childNodes;
     let title = addedCartItem[1].value;
     let price = addedCartItem[3].value;
@@ -41,6 +43,8 @@ lsCounter = localStorage.getItem('lsCounter');
 cartItemCounter = localStorage.getItem('cartItemCounter');
 window.addEventListener('load', () => {
     if(localStorage.getItem('cartItemCounter') == 0){
+        localStorage.setItem('lsCounter',0);
+        lsCounter = localStorage.getItem('lsCounter');
         localStorage.removeItem('lsCounter');
         localStorage.removeItem('cartItemCounter');
         return ;
@@ -53,7 +57,7 @@ window.addEventListener('load', () => {
         addToCartLocalStorageReuseFunction(i);
     }
 })
-function addToCartReuseFunction (createParam,tagNameParam,classNameParam,appendParam){
+addToCartReuseFunction = (createParam,tagNameParam,classNameParam,appendParam) => {
     createParam = document.createElement(tagNameParam);
     createParam.classList.add(classNameParam);
     appendParam.append(createParam);
@@ -95,24 +99,21 @@ function addToCartLocalStorageReuseFunction(param){
     document.getElementById('showCart').append(creatHrTag);
 }
 // show cart list
-document.getElementsByClassName('cartIcon')[0].addEventListener('click',function(){
-    ShowReuseCartFunction("block", "-1", "none");
-
-});
-// quit from aside bar
-document.getElementsByClassName('faTimesIcon')[0].addEventListener('click',quitShowingCartItem);
-document.getElementsByClassName('asideLeft')[0].addEventListener('click',quitShowingCartItem);
-function quitShowingCartItem() {
-    ShowReuseCartFunction("none", "1", "block");
-}
-// reuse fun cart
-function ShowReuseCartFunction(display, zIndex, navDisplay){
+ShowReuseCartFunction = (display, zIndex, navDisplay) => {
     asideTag[0].style.display = display;
     asideTag[1].style.display = display;
     document.getElementsByClassName('carousel-control-prev')[0].style.zIndex = zIndex;
     document.getElementsByClassName('carousel-control-next')[0].style.zIndex = zIndex;
     document.getElementsByTagName('nav')[0].style.display = navDisplay;
 }
+document.getElementsByClassName('cartIcon')[0].addEventListener('click',() => 
+    ShowReuseCartFunction("block", "-1", "none")
+);
+// quit from aside bar
+quitShowingCartItem = () => ShowReuseCartFunction("none", "1", "block");
+document.getElementsByClassName('faTimesIcon')[0].addEventListener('click',quitShowingCartItem);
+document.getElementsByClassName('asideLeft')[0].addEventListener('click',quitShowingCartItem);
+
 
 
   
