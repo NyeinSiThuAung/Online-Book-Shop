@@ -2,8 +2,14 @@
 
 @section('content')
 <div class="container mt-4">
-    <h4 class="d-inline-block ps-4 pe-4">Cart List</h4>
-    <table class="table table-bordered border-warning table-light caption-top mt-3 table-responsive table-hover table-striped align-middle">
+    <h4 class="d-inline-block ps-4 pe-4 mb-3">Cart List</h4>
+    @if (session('error'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <table class="table table-bordered border-warning table-light caption-top table-responsive table-hover table-striped align-middle">
         <tbody>
             <tr>
                 <th>No</th>
@@ -21,8 +27,8 @@
             </tr>
         </tfoot>
     </table>
-    <button class="btn btn-primary ps-4 pe-4" onclick="history.back()">Back</button>
-    <form action="#" class="text-center d-inline-block float-end">
+    <a class="btn btn-primary ps-4 pe-4" href="{{ route('home') }}">Back</a>
+    <form action="{{ route('order')}}" method="GET" class="text-center d-inline-block float-end">
         <div id="inputDiv"></div>
         <button class="btn btn-warning ps-4 pe-4">Buy</button>
     </form>
@@ -65,6 +71,7 @@
 
             let createdInputTitleTag = reuseFunction('createInputTitleTag', 'input', '', '', inputDiv, false);
             createdInputTitleTag.type = "hidden";
+            createdInputTitleTag.name = "title" + i;
             createdInputTitleTag.value = localStorage.getItem('title'+i);
         }
     })

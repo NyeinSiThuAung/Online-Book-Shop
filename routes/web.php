@@ -36,3 +36,7 @@ Auth::routes(['reset' => false]);
 Route::get('/cartItemOrder',function() {
     return view('order.cartItemOrder');
 })->name('cartItemOrder');
+
+// order
+Route::get('/order', [App\Http\Controllers\OrderController::class, 'index'])->name('order');
+Route::post('/orderStore',[App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
