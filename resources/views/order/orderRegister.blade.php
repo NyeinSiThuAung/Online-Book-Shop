@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Order Form</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('order.store') }}">
                         @csrf
@@ -55,9 +54,8 @@
                         @endforeach
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a href="{{ route('cartItemOrder') }}" class="btn btn-warning ms-2">Back</a>
                             </div>
                         </div>
                     </form>

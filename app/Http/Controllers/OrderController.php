@@ -49,6 +49,7 @@ class OrderController extends Controller
                 $orders->save();
             }
         }
+        return redirect()->route('home')->with('orderSuccess','Ordered Successfully');
     }
 
 }

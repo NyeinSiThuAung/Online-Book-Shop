@@ -40,3 +40,4 @@ Route::get('/cartItemOrder',function() {
 // order
 Route::get('/order', [App\Http\Controllers\OrderController::class, 'index'])->name('order');
 Route::post('/orderStore',[App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
+Route::get('/viewOrder', [App\Http\Controllers\viewOrderController::class, 'index'])->name('viewOrder');

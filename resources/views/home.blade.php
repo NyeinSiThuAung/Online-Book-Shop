@@ -2,6 +2,13 @@
 
 @section('content')
 <body onload="myFunction(['bestSelling', 'recentUpload', 'recentPopular'], ['Best Selling Books', 'Recent Upload Books', 'Recent Popular Books'])">
+
+@if (session('orderSuccess'))
+        <div class="alert alert-warning alert-dismissible fade show fixed-top" role="alert">
+            {{ session('orderSuccess') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 <aside>
   <i class="fas fa-times mt-4 me-3 fs-5 d-block float-end faTimesIcon"></i>
   <div class="text-center mt-3">
@@ -30,14 +37,18 @@
           <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Shop</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#">Author</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Category</a>
         </li>
+        @auth
+        @if(Auth::user()->admin_id)
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('viewOrder') }}">Order</a>
+        </li>
+        @endif
+        @endauth
       </ul>
       <div class="d-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
