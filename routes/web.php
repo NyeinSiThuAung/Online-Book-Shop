@@ -40,4 +40,9 @@ Route::get('/cartItemOrder',function() {
 // order
 Route::get('/order', [App\Http\Controllers\OrderController::class, 'index'])->name('order');
 Route::post('/orderStore',[App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
+
+// view Order
 Route::get('/viewOrder', [App\Http\Controllers\viewOrderController::class, 'index'])->name('viewOrder');
+Route::get('/orderApprove/{order_id}', [App\Http\Controllers\viewOrderController::class, 'approve'])->name('orderApprove');
+Route::get('/orderDone/{order_id}', [App\Http\Controllers\viewOrderController::class, 'done'])->name('orderDone');
+Route::get('/orderRefuse/{order_id}', [App\Http\Controllers\viewOrderController::class, 'refuse'])->name('orderRefuse');

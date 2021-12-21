@@ -16,7 +16,39 @@ class viewOrderController extends Controller
         $orders = Order::whereIn('order_id', $order_id)
         ->get()
         ->groupBy('order_id');
-        // dd(config('orderstatus'));
-        return view('viewOrder',compact('orders'));
+        $status = config('orderstatus');
+        // dd($status);
+        return view('viewOrder',compact('orders', 'status'));
+    }
+
+    public function approve($id)
+    {
+        $processing = array_flip(config('orderstatus'))['approved']; // will out 0
+        $this->reuse($id, true, $processing);
+        return redirect()->route('viewOrder')->with('approve',"Order_id: ".$id ." is approved");
+    }
+
+    public function done($id)
+    {
+        $this->reuse($id, false);
+        return redirect()->route('viewOrder')->with('done',"Order_id: ".$id ." is done");
+    }
+
+    public function refuse($id)
+    {
+        $this->reuse($id, false);
+        return redirect()->route('viewOrder')->with('refuse',"Order_id: ".$id ." is removed");
+    }
+    
+    private function reuse($id, $approve, $processing='') {
+        $orders = Order::where('order_id',$id)->get();
+        foreach($orders as $val){
+            if($approve){
+                $val->status = $processing;
+                $val->save();
+            }else{
+                $val->delete();
+            }
+        }
     }
 }

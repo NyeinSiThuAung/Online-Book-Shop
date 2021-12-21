@@ -1,8 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<body onload="myFunction(['bestSelling', 'recentUpload', 'recentPopular'], ['Best Selling Books', 'Recent Upload Books', 'Recent Popular Books'])">
-
+<body>
 @if (session('orderSuccess'))
         <div class="alert alert-warning alert-dismissible fade show fixed-top" role="alert">
             {{ session('orderSuccess') }}
@@ -94,85 +93,145 @@
 </div>
 </header>
 <main class="container" id="navScrollWp">
-  <div class="bestSelling"></div>
-  <div class="recentUpload"></div>
-  <div class="recentPopular"></div>
-</main>
-<script>
-// Show Main Content 
-
-function myFunction(sectionClassName, h2Text) {
-  for(let i = 0; i < sectionClassName.length; i++){
-    document.getElementsByClassName(sectionClassName[i])[0].innerHTML += `
-  <h2 class="text-center pt-4">${h2Text[i]}</h2>
-      <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="d-flex justify-content-center mb-5">
-              @foreach($fBooks as $fBook)
-                <div>
-                  <a href="{{ route('admin.show', [$fBook->id]) }}"><img src="/images/{{$fBook->image}}" class="carousel-img-style" alt="..."></a>
-                  <div class="text-center">
-                    <input type="hidden" value="{{ $fBook->name }}" name="name">
-                    <input type="hidden" value="{{ $fBook->price }}" name="price">
-                    <input type="hidden" value="{{ $fBook->image }}"  name="image">
-                    <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                    <button class="btn orderButton">Order</button>
-                  </div>
+  <div class="popularBooks">
+    <h2 class="text-center pt-4">Recently Uploaded Books</h2>
+    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center mb-5">
+            @foreach($ruFbooks as $fBook)
+              <div>
+                <a href="{{ route('admin.show', [$fBook->id]) }}"><img src="/images/{{$fBook->image}}" class="carousel-img-style" alt="..."></a>
+                <div class="text-center">
+                  <input type="hidden" value="{{ $fBook->name }}" name="name">
+                  <input type="hidden" value="{{ $fBook->price }}" name="price">
+                  <input type="hidden" value="{{ $fBook->image }}"  name="image">
+                  <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
+                  <a class="btn orderButton" onclick="addToCartFunction(event)" href="{{ route('cartItemOrder') }}">Order</a>
                 </div>
-              @endforeach
-            </div>
+              </div>
+            @endforeach
           </div>
-          @if(count($sBooks) > 0)
-          <div class="carousel-item">
-            <div class="d-flex justify-content-center mb-5">
-              @foreach($sBooks as $sBook)
-                <div>
-                  <a href="{{ route('admin.show', [$sBook->id]) }}"><img src="/images/{{$sBook->image}}" class="carousel-img-style" alt="..."></a>
-                  <div class="text-center">
-                    <input type="hidden" value="{{ $sBook->name }}" name="name">
-                    <input type="hidden" value="{{ $sBook->price }}" name="price">
-                    <input type="hidden" value="{{ $sBook->image }}"  name="image">
-                    <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                    <button class="btn orderButton">Order</button>
-                  </div>
-                </div>
-              @endforeach
-            </div>
-          </div>
-          @endif
-          @if(count($tBooks) > 0)
-          <div class="carousel-item">
-            <div class="d-flex justify-content-center mb-5">
-              @foreach($tBooks as $tBook)
-                <div>
-                  <a href="{{ route('admin.show', [$tBook->id]) }}"><img src="/images/{{$tBook->image}}" class="carousel-img-style" alt="..."></a>
-                  <div class="text-center">
-                    <input type="hidden" value="{{ $tBook->name }}" name="name">
-                    <input type="hidden" value="{{ $tBook->price }}" name="price">
-                    <input type="hidden" value="{{ $tBook->image }}"  name="image">
-                    <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                    <button class="btn orderButton">Order</button>
-                  </div>
-                </div>
-              @endforeach
-            </div>
-          </div>
-          @endif
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-          <i class="fas fa-chevron-circle-left"  aria-hidden="true"></i>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-          <i class="fas fa-chevron-circle-right"  aria-hidden="true"></i>
-          <span class="visually-hidden">Next</span>
-        </button>
+        @if(count($ruSbooks) > 0)
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center mb-5">
+            @foreach($ruSbooks as $sBook)
+              <div>
+                <a href="{{ route('admin.show', [$sBook->id]) }}"><img src="/images/{{$sBook->image}}" class="carousel-img-style" alt="..."></a>
+                <div class="text-center">
+                  <input type="hidden" value="{{ $sBook->name }}" name="name">
+                  <input type="hidden" value="{{ $sBook->price }}" name="price">
+                  <input type="hidden" value="{{ $sBook->image }}"  name="image">
+                  <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
+                  <button class="btn orderButton">Order</button>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </div>
+        @endif
+        @if(count($ruTbooks) > 0)
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center mb-5">
+            @foreach($ruTbooks as $tBook)
+              <div>
+                <a href="{{ route('admin.show', [$tBook->id]) }}"><img src="/images/{{$tBook->image}}" class="carousel-img-style" alt="..."></a>
+                <div class="text-center">
+                  <input type="hidden" value="{{ $tBook->name }}" name="name">
+                  <input type="hidden" value="{{ $tBook->price }}" name="price">
+                  <input type="hidden" value="{{ $tBook->image }}"  name="image">
+                  <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
+                  <button class="btn orderButton">Order</button>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </div>
+        @endif
       </div>
-      <div class="text-center"><button class="btn btn-warning mb-4">View More</button></div>`;
-  }
-}
-</script>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+        <i class="fas fa-chevron-circle-left"  aria-hidden="true"></i>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+        <i class="fas fa-chevron-circle-right"  aria-hidden="true"></i>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="text-center"><button class="btn btn-warning mb-4">View More</button></div>
+  </div>
+<!-- All -->
+  
+<div class="popularBooks">
+    <h2 class="text-center pt-4">All Books</h2>
+    <div id="carouselExampleControlsNoTouching2" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center mb-5">
+            @foreach($fBooks as $fBook)
+              <div>
+                <a href="{{ route('admin.show', [$fBook->id]) }}"><img src="/images/{{$fBook->image}}" class="carousel-img-style" alt="..."></a>
+                <div class="text-center">
+                  <input type="hidden" value="{{ $fBook->name }}" name="name">
+                  <input type="hidden" value="{{ $fBook->price }}" name="price">
+                  <input type="hidden" value="{{ $fBook->image }}"  name="image">
+                  <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
+                  <button class="btn orderButton">Order</button>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </div>
+        @if(count($sBooks) > 0)
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center mb-5">
+            @foreach($sBooks as $sBook)
+              <div>
+                <a href="{{ route('admin.show', [$sBook->id]) }}"><img src="/images/{{$sBook->image}}" class="carousel-img-style" alt="..."></a>
+                <div class="text-center">
+                  <input type="hidden" value="{{ $sBook->name }}" name="name">
+                  <input type="hidden" value="{{ $sBook->price }}" name="price">
+                  <input type="hidden" value="{{ $sBook->image }}"  name="image">
+                  <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
+                  <button class="btn orderButton">Order</button>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </div>
+        @endif
+        @if(count($tBooks) > 0)
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center mb-5">
+            @foreach($tBooks as $tBook)
+              <div>
+                <a href="{{ route('admin.show', [$tBook->id]) }}"><img src="/images/{{$tBook->image}}" class="carousel-img-style" alt="..."></a>
+                <div class="text-center">
+                  <input type="hidden" value="{{ $tBook->name }}" name="name">
+                  <input type="hidden" value="{{ $tBook->price }}" name="price">
+                  <input type="hidden" value="{{ $tBook->image }}"  name="image">
+                  <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
+                  <button class="btn orderButton">Order</button>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </div>
+        @endif
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching2" data-bs-slide="prev">
+        <i class="fas fa-chevron-circle-left"  aria-hidden="true"></i>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching2" data-bs-slide="next">
+        <i class="fas fa-chevron-circle-right"  aria-hidden="true"></i>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="text-center"><button class="btn btn-warning mb-4">View More</button></div>
+  </div>
+</main>
 <script src="/js/javascript.js"></script>
 </body>
 @endsection

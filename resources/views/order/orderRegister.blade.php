@@ -54,7 +54,7 @@
                         @endforeach
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" onclick="removeAllLs()" class="btn btn-primary">Submit</button>
                                 <a href="{{ route('cartItemOrder') }}" class="btn btn-warning ms-2">Back</a>
                             </div>
                         </div>
@@ -64,4 +64,9 @@
         </div>
     </div>
 </div>
+<script>
+    removeAllLs = () => {
+        localStorage.clear();
+    }
+</script>
 @endsection

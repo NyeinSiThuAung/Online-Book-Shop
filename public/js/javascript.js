@@ -45,8 +45,7 @@ window.addEventListener('load', () => {
     if(localStorage.getItem('cartItemCounter') == 0){
         localStorage.setItem('lsCounter',0);
         lsCounter = localStorage.getItem('lsCounter');
-        localStorage.removeItem('lsCounter');
-        localStorage.removeItem('cartItemCounter');
+        localStorage.clear();
         return ;
     }
     let numberLsCounter = Number(lsCounter);

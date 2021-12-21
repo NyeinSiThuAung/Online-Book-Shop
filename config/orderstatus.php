@@ -1,7 +1,7 @@
 <?php
 return [
-    'approve' => 0,
-    'refuse' => 1,
-    'done' => 2,
-    'new' => 3,
+    0 => 'approved',
+    1 => 'refuse',
+    2 => 'done',
+    3 => 'new',
 ];
