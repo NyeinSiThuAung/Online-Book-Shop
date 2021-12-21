@@ -17,7 +17,10 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/recentViewMore', [App\Http\Controllers\HomeController::class, 'recentViewMore'])->name('recentViewMore');
+Route::get('/allViewMore', [App\Http\Controllers\HomeController::class, 'allViewMore'])->name('allViewMore');
 
+// admin
 Route::resource('admin', AdminController::class)->names([
     'index' => 'admin',
     'store' => 'admin.store',
@@ -27,19 +30,22 @@ Route::resource('admin', AdminController::class)->names([
     'destroy' => 'admin.destroy',
     'edit' => 'admin.edit',
 ]);
-
 Route::get('/logOut', [App\Http\Controllers\LogOutController::class, 'index'])->name('logOut');
 Route::post('/cateStore', [App\Http\Controllers\CategoryStoreController::class, 'storeCategory'])->name('cateStore');
 Route::post('/authorStore', [App\Http\Controllers\CategoryStoreController::class, 'storeAuthor'])->name('authorStore');
 Auth::routes(['reset' => false]);
+// end
 
+// cart
 Route::get('/cartItemOrder',function() {
     return view('order.cartItemOrder');
 })->name('cartItemOrder');
+// end
 
 // order
 Route::get('/order', [App\Http\Controllers\OrderController::class, 'index'])->name('order');
 Route::post('/orderStore',[App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
+// end
 
 // view Order
 Route::get('/viewOrder', [App\Http\Controllers\viewOrderController::class, 'index'])->name('viewOrder');

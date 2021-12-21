@@ -124,7 +124,7 @@
                   <input type="hidden" value="{{ $sBook->price }}" name="price">
                   <input type="hidden" value="{{ $sBook->image }}"  name="image">
                   <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                  <button class="btn orderButton">Order</button>
+                  <a class="btn orderButton" onclick="addToCartFunction(event)" href="{{ route('cartItemOrder') }}">Order</a>
                 </div>
               </div>
             @endforeach
@@ -142,7 +142,7 @@
                   <input type="hidden" value="{{ $tBook->price }}" name="price">
                   <input type="hidden" value="{{ $tBook->image }}"  name="image">
                   <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                  <button class="btn orderButton">Order</button>
+                  <a class="btn orderButton" onclick="addToCartFunction(event)" href="{{ route('cartItemOrder') }}">Order</a>
                 </div>
               </div>
             @endforeach
@@ -159,7 +159,7 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <div class="text-center"><button class="btn btn-warning mb-4">View More</button></div>
+    <div class="text-center"><a href="{{ ('recentViewMore') }}" class="btn btn-warning mb-4">View More</a></div>
   </div>
 <!-- All -->
   
@@ -177,7 +177,7 @@
                   <input type="hidden" value="{{ $fBook->price }}" name="price">
                   <input type="hidden" value="{{ $fBook->image }}"  name="image">
                   <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                  <button class="btn orderButton">Order</button>
+                  <a class="btn orderButton" onclick="addToCartFunction(event)" href="{{ route('cartItemOrder') }}">Order</a>
                 </div>
               </div>
             @endforeach
@@ -194,7 +194,7 @@
                   <input type="hidden" value="{{ $sBook->price }}" name="price">
                   <input type="hidden" value="{{ $sBook->image }}"  name="image">
                   <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                  <button class="btn orderButton">Order</button>
+                  <a class="btn orderButton" onclick="addToCartFunction(event)" href="{{ route('cartItemOrder') }}">Order</a>
                 </div>
               </div>
             @endforeach
@@ -212,7 +212,7 @@
                   <input type="hidden" value="{{ $tBook->price }}" name="price">
                   <input type="hidden" value="{{ $tBook->image }}"  name="image">
                   <button class="btn addCartButton" onclick="addToCartFunction(event)">Add to Cart</button>
-                  <button class="btn orderButton">Order</button>
+                  <a class="btn orderButton" onclick="addToCartFunction(event)" href="{{ route('cartItemOrder') }}">Order</a>
                 </div>
               </div>
             @endforeach
@@ -229,9 +229,10 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <div class="text-center"><button class="btn btn-warning mb-4">View More</button></div>
+    <div class="text-center"><a href="{{ ('allViewMore') }}" class="btn btn-warning mb-4">View More</a></div>
   </div>
 </main>
+<script src="/js/waypoint.js"></script>
 <script src="/js/javascript.js"></script>
 </body>
 @endsection

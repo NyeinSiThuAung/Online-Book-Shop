@@ -99,7 +99,7 @@ main i{
 main button.carousel-control-prev,main button.carousel-control-next{
     width: 2.5rem;
 }
-main .addCartButton, main .orderButton{
+.addCartButton, .orderButton{
     background-color: rgba(49, 49, 49,0.5)!important;
     color: white;
 

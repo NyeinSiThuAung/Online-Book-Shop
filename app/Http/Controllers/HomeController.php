@@ -29,4 +29,16 @@ class HomeController extends Controller
         // dd($sBooks);
         return view('home',compact('ruFbooks', 'ruSbooks', 'ruTbooks', 'fBooks','sBooks','tBooks'));
     }
+
+    public function recentViewMore () 
+    {
+        $books = Book::orderBy('id','desc')->limit(20)->get();
+        return view('viewMore.recently',compact('books'));
+    }
+
+    public function allViewMore ()
+    {
+        $books = Book::paginate(9);
+        return view('viewMore.all',compact('books'));
+    }
 }
