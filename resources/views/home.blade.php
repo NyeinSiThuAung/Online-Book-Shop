@@ -26,20 +26,20 @@
 <header>
   <nav class="navbar navbar-expand-lg nav-waypoint">
   <div class="container">
-    <a class="navbar-brand flex-grow-1" href="#"><img src="/css/img/header_icon.png" alt="" height="45" width="45"></a>
+    <a class="navbar-brand flex-grow-1" href="{{ route('home') }}"><img src="/css/img/header_icon.png" alt="" height="45" width="45"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item active-link">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="{{ route('home') }}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Author</a>
+          <a class="nav-link" href="{{ route('author') }}">Author</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Category</a>
+          <a class="nav-link" href="{{ route('category') }}">Category</a>
         </li>
         @auth
         @if(Auth::user()->admin_id)
@@ -86,8 +86,8 @@
 </nav>
 <div class="text">
     <h1 id="testWp">Get Your Books With <br> The Best Price</h1>
-    <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search">
+    <form class="d-flex" action="{{ route('search') }}" method="get">
+        <input class="form-control me-2" type="search" placeholder="Search" name="search">
         <button class="btn" type="submit">Search</button>
     </form>
 </div>

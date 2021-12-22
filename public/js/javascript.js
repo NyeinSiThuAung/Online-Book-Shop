@@ -85,6 +85,8 @@ ShowReuseCartFunction = (display, zIndex, navDisplay) => {
     asideTag[1].style.display = display;
     document.getElementsByClassName('carousel-control-prev')[0].style.zIndex = zIndex;
     document.getElementsByClassName('carousel-control-next')[0].style.zIndex = zIndex;
+    document.getElementsByClassName('carousel-control-prev')[1].style.zIndex = zIndex;
+    document.getElementsByClassName('carousel-control-next')[1].style.zIndex = zIndex;
     document.getElementsByTagName('nav')[0].style.display = navDisplay;
 }
 document.getElementsByClassName('cartIcon')[0].addEventListener('click',() => 

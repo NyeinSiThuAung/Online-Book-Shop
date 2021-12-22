@@ -17,17 +17,16 @@
 </aside>
 <aside class="asideLeft"></aside>
 <div class="container">
-        <a href="{{ route('home') }}"class="btn btn-primary mt-3 mb-3">Back</a>
-        <div style="position:relative;left:92%;" class="d-inline-block cartIcon">
-            <i class="fas fa-shopping-cart fs-5"></i>
-            <span style="position:absolute;top:-70%;font-size:0.9rem;border-radius:50%;background-color:#FF8353;padding:0 35%;color:rgb(49, 49, 49)" class="cartCountNo">0</span>
-        </div>
-    <div class="row">
+  <a href="{{ route('home') }}"class="btn btn-primary mt-3 mb-3">Back</a>
+  <div style="position:relative;left:92%;" class="d-inline-block cartIcon">
+  <i class="fas fa-shopping-cart fs-5"></i>
+  <span style="position:absolute;top:-70%;font-size:0.9rem;border-radius:50%;background-color:#FF8353;padding:0 35%;color:rgb(49, 49, 49)" class="cartCountNo">0</span>
+</div>
+<div class="row bg-light">
         @foreach($books as $book)
-        <div class="col-4 mb-5">
-            <div class="card">
-                <div class="card-body text-center">
-                    <img src="images/{{$book->image}}" alt="" width="95%" class="mb-3">
+        <div class="col-4 mb-4 mt-5">
+                <div class="text-center">
+                    <img src="images/{{$book->image}}" alt="" width="80%" class="mb-3">
                     <!-- js mhr parent nt call htr lo -->
                     <div> 
                         <input type="hidden" value="{{ $book->name }}" name="name">
@@ -37,7 +36,6 @@
                         <a class="btn orderButton" onclick="addToCartFunction(event)" href="{{ route('cartItemOrder') }}">Order</a>
                     </div>
                 </div>
-            </div>
         </div>
         @endforeach
     </div>

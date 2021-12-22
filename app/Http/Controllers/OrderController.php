@@ -23,7 +23,7 @@ class OrderController extends Controller
 
     public function store(Request $request){
         $bookTitles = $request->except('_token','name','ph_no','address');
-        $order_id = date('dHis') . rand(1,99);
+        $order_id = date('dHis') . rand(1,9);
         $request->validate([
             'name' => 'required|max:255',
             'ph_no' => 'required|digits:9',

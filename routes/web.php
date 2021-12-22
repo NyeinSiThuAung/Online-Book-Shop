@@ -16,9 +16,17 @@ use App\Http\Controllers\AdminController;
 |
 */
 
+// home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/recentViewMore', [App\Http\Controllers\HomeController::class, 'recentViewMore'])->name('recentViewMore');
 Route::get('/allViewMore', [App\Http\Controllers\HomeController::class, 'allViewMore'])->name('allViewMore');
+Route::get('/authors', [App\Http\Controllers\HomeController::class, 'author'])->name('author');
+Route::get('/dauthors', [App\Http\Controllers\HomeController::class, 'authordesc'])-> name('authordesc');
+Route::get('/categories', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
+Route::get('/dcategories', [App\Http\Controllers\HomeController::class, 'categorydesc'])-> name('categorydesc');
+Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])-> name('search');
+
+// end
 
 // admin
 Route::resource('admin', AdminController::class)->names([

@@ -30,7 +30,7 @@
     <a class="btn btn-primary ps-4 pe-4" href="{{ route('home') }}">Back</a>
     <form action="{{ route('order')}}" method="GET" class="text-center d-inline-block float-end">
         <div id="inputDiv"></div>
-        <button class="btn btn-warning ps-4 pe-4">Buy</button>
+        <button class="btn btn-warning ps-4 pe-4 disabledButton" disabled>Buy</button>
     </form>
 </div>
 <script>
@@ -48,13 +48,24 @@
         let numberLsCounter = Number(localStorage.getItem('lsCounter'));
         let number = 1;
         let total = 0;
+        let tBodyTag = document.getElementsByTagName('tbody')[0]
+        if(localStorage.getItem('cartItemCounter') > 0){
+            document.getElementsByClassName('disabledButton')[0].disabled = false; 
+        }else{
+            let createdTableRowTag = reuseFunction('createTableRowTag', 'tr', '', '', tBodyTag, false);
+            let createdTableDataTag = reuseFunction('createTableDataTag', 'td', '', '', createdTableRowTag, false);
+            createdTableDataTag.setAttribute('colspan','4');
+            createdTableDataTag.innerHTML = "No Item Added Yet!";
+            createdTableDataTag.classList.add('p-3','fs-5');
+            document.getElementsByTagName('tfoot')[0].style.display="none";
+        }
         for(let i = 1; i <= numberLsCounter; i++){
             if(!localStorage.getItem('title'+i)){
                 continue;
             }
 
             let createTableRowTag = document.createElement('tr');
-            document.getElementsByTagName('tbody')[0].append(createTableRowTag);
+            tBodyTag.append(createTableRowTag);
             let createTableNumberDataTag = document.createElement('td');
             createTableNumberDataTag.innerHTML = number++;
             createTableRowTag.append(createTableNumberDataTag);

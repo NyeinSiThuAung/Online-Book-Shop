@@ -6,7 +6,6 @@
     box-sizing: border-box !important;
 }
 body{
-    height: 200vh;
     background-color: rgb(228, 228, 228);
 } 
 h1,h2,h3,h4,h5,h6{
@@ -129,3 +128,9 @@ aside a{
     text-decoration:none;
 }
 /* ----------end aside------------ */
+
+/* ---------------author table--------------- */
+div.author-table {
+    height: 90vh;
+    overflow-y: auto;
+}

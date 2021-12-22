@@ -1,12 +1,16 @@
 @extends('layouts.layout')
 @section('content')
-<div class="container mt-4">
-    <a href="{{route('admin')}}" class="btn btn-primary mb-4">Back</a>
+<nav class="p-2 mb-4 sticky-top bg-light">
+    <div class="container">
+    <a href="{{route('admin')}}" class="btn btn-primary">Back</a>
     <div class="float-end">
-    <a href="#book" class="btn btn-primary mb-4">Book</a>
-    <a href="#category" class="btn btn-primary mb-4">Category</a>
-    <a href="#author" class="btn btn-primary mb-4">Author</a>
+        <a href="#book" class="btn btn-primary">Book</a>
+        <a href="#category" class="btn btn-primary">Category</a>
+        <a href="#author" class="btn btn-primary">Author</a>
     </div>
+    </div>
+</nav>
+<div class="container">
     <div class="card">
     <h5 class="card-header pt-3 pb-3" id="book">Creat book pannel</h5>
     @if ($errors->any())
@@ -94,21 +98,15 @@
     <!-- category -->
     <div class="card mt-5">
     <h5 class="card-header  pt-3 pb-3" id="category">New Category Pannel</h5>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @error('category_name')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
     <div class="card-body">
         <form action="{{route('cateStore')}}" method="post">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">New Category</label>
-                <input name="name" type="text" class="form-control" id="title" value="{{ old('name') }}">
+                <input name="category_name" type="text" class="form-control" id="title" value="{{ old('category_name') }}">
             </div>
             <button type="submit" class="btn btn-success float-end">Add</button>
         </form>
@@ -117,27 +115,15 @@
     <!-- author -->
     <div class="card mt-5 mb-5">
     <h5 class="card-header pt-3 pb-3" id="author">New Author Pannel</h5>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    @if (session('create'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ session('edit') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+    @error('author_name')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
     <div class="card-body">
-        <form action="{{route('authorStore')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('authorStore')}}" method="post">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Name</label>
-                <input name="name" type="text" class="form-control" id="title" value="{{ old('name') }}">
+                <input name="author_name" type="text" class="form-control" id="title" value="{{ old('author_name') }}">
             </div>
             <button type="submit" class="btn btn-success float-end">Add</button>
         </form>
