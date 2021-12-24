@@ -97,6 +97,19 @@ quitShowingCartItem = () => ShowReuseCartFunction("none", "1", "block");
 document.getElementsByClassName('faTimesIcon')[0].addEventListener('click',quitShowingCartItem);
 document.getElementsByClassName('asideLeft')[0].addEventListener('click',quitShowingCartItem);
 
+// End Cart
 
-
+// showImg in crete and edit file
+function CreateImg(data){
+    let newPhoto = document.getElementById('newPhoto');
+    if (data.files && data.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('oldPhoto').style.display = "none";
+            newPhoto.style.display = "inline-block";
+            newPhoto.src = e.target.result;
+        };
+        reader.readAsDataURL(data.files[0]);
+    }
+}
   

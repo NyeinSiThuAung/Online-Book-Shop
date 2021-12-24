@@ -6,7 +6,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class viewOrderController extends Controller
+class ViewOrderController extends Controller
 {
     public function index() {
         $order_id = Order::select('order_id')

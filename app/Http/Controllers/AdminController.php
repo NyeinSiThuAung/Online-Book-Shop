@@ -56,7 +56,7 @@ class AdminController extends Controller
         }else{
             Book::create($validatedData + ['description' => 'No description yet']);
         }
-        return redirect()->route('admin.create')->with('create', 'Created Successfully!');
+        return redirect()->route('admin')->with('create', 'Created Successfully!');
     }
 
     /**
@@ -112,7 +112,7 @@ class AdminController extends Controller
             $inputData['image'] = "$imgName";
         }
         $admin->update($inputData);
-        return redirect()->route('admin.edit', [$admin->id])->with('edit', 'Edited Successfully!');
+        return redirect()->route('admin', [$admin->id])->with('edit', 'Edited Successfully!');
     }
 
     /**
@@ -123,10 +123,13 @@ class AdminController extends Controller
      */
     public function destroy(Book $admin)
     {
+        $deleteImgPath = "images/". $admin->image;
+        File::delete($deleteImgPath);
         $this->authorize('delete', Admin::find(1));
         $admin->delete();
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('delete',"Deleted Sucessfully");
     }
+
     public function moveImg($image){
         $imgName = date('YmdHis') . "." . $image->getClientOriginalExtension();
         $destinationPath = 'images/';

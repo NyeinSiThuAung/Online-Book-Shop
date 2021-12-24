@@ -159,7 +159,7 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <div class="text-center"><a href="{{ ('recentViewMore') }}" class="btn btn-warning mb-4">View More</a></div>
+    <div class="text-center"><a href="{{ route('recentViewMore') }}" class="btn btn-warning mb-4">View More</a></div>
   </div>
 <!-- All -->
   
@@ -229,7 +229,7 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <div class="text-center"><a href="{{ ('allViewMore') }}" class="btn btn-warning mb-4">View More</a></div>
+    <div class="text-center"><a href="{{ route('allViewMore') }}" class="btn btn-warning mb-4">View More</a></div>
   </div>
 </main>
 <script src="/js/waypoint.js"></script>

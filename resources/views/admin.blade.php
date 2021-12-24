@@ -5,6 +5,24 @@
     <div class="card">
     <div class="card-header">
         <a href="{{route('admin.create')}}" class="btn btn-success mt-4 mb-4">Create</a>
+        @if (session('delete'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ session('delete') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if (session('create'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ session('create') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if (session('edit'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ session('edit') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
     </div>
     <div class="card-body">
         @foreach($books as $book)

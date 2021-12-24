@@ -22,12 +22,6 @@
             </ul>
         </div>
     @endif
-    @if (session('create'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ session('create') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
     @if (session('storeCate'))
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             {{ session('storeCate') }}
@@ -67,15 +61,6 @@
                     @endforeach
                 </select>
             </div>
-            <!-- <div class="mb-3">
-                <label for="categ" class="form-label">Category</label>
-                <input class="form-control" list="categoryOptions" id="categ" placeholder="Type to search...">
-                <datalist id="categoryOptions">
-                    @foreach($categories as $category)
-                    <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : ''  }}>{{$category->name}}</option>
-                    @endforeach
-                </datalist>
-            </div> -->
             <div class="mb-3">
                 <label for="descr" class="form-label">Description</label>
                 <textarea name="description" id="descr" cols="30" rows="10" class="form-control"></textarea>
@@ -83,11 +68,11 @@
             <div class="mb-3">
                 <div class="row">
                     <div class="col-11">
-                        <input type="file" name="image" class="form-control mt-4" oninput="CreateImg(this.value)" id="myImgFile">
+                        <input type="file" name="image" class="form-control mt-4" onchange="CreateImg(this)" accept="image/*">
                     </div>
                     <div class="col-1">
-                        <p class="myText mt-2">No photo</p>
-                        <img src="" alt="Creat Img" width='70' height='80' id="myImg" style="display:none">
+                        <p class="mt-4" id="oldPhoto">No photo</p>
+                        <img src="" alt="Creat Img" width='70' height='80' id="newPhoto" style="display:none">
                     </div>
                 </div>
             </div>
@@ -130,14 +115,5 @@
     </div>
     </div>
 </div>
-<script>
-function CreateImg(data){
-    let myImgFile = document.getElementById("myImgFile");
-    let imgName = myImgFile.files[0].name;
-    document.getElementsByClassName('myText')[0].style.display = "none";
-    myImg.style.display = "inline-block";
-    myImg.src = "/css/img/"+ imgName;
-    return imgName;
-}
-</script>
+<script src="/js/javascript.js"></script>
 @endsection

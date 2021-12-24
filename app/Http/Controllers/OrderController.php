@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Order;
+use Twilio\Rest\Client;
 use Illuminate\Http\Request;
+use App\Events\StoreOrderEvent;
 
 class OrderController extends Controller
 {
     public function index (Request $addedItems) {
         $addedItems = $addedItems->except('_token');
-        // $test2 = "";
-        // foreach($cartRequest as $val){
-        //     $test = Book::where('name', '=', $val)->get();
-        //     foreach($test as $val){
-        //         $test2 .= $val->name;
-        //     }
-        // }
-        // dd($test2);
         return view('order.orderRegister',compact('addedItems'));
     }
 
@@ -38,17 +32,18 @@ class OrderController extends Controller
         foreach($bookTitles as $titleVal){
             $validateBookTitles = Book::where('name', '=', $titleVal)->get();
             foreach($validateBookTitles as $bookVal){
-                $orders = new Order;
-                $orders->order_id = $order_id;
-                $orders->name = $request->name;
-                $orders->ph_no = $request->ph_no;
-                $orders->address = $request->address;
-                $orders->book_name = $bookVal->name;
-                $orders->price = $bookVal->price;
-                $orders->status = 3;
-                $orders->save();
+                $order = Order::create([
+                    'order_id' => $order_id,
+                    'name' => $request->name,
+                    'ph_no' => $request->ph_no,
+                    'address' => $request->address,
+                    'book_name' => $bookVal->name,
+                    'price' => $bookVal->price,
+                    'status' => 3,
+                ]);
             }
         }
+        StoreOrderEvent::dispatch($order);
         return redirect()->route('home')->with('orderSuccess','Ordered Successfully');
     }
 
