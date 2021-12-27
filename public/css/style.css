@@ -85,9 +85,9 @@ main img.carousel-img-style{
     margin: 3rem 0rem;
     border-radius: 0.8rem;
 }
-.popularBooks, .recentUpload, .recentPopular{
-    box-shadow: 0 5px 7px -2px rgb(201, 199, 199);
-    margin-top: 9rem;
+.recentUpload, .allBook{
+    /* box-shadow: 0 5px 7px -2px rgb(201, 199, 199); */
+    margin: 9rem 0;
 }
 i{
     color: rgb(255, 166, 0);
@@ -124,7 +124,7 @@ aside.asideLeft{
     background-color: black;
     opacity: 0.7;
 }
-aside a{
+a{
     text-decoration:none;
 }
 /* ----------end aside------------ */
@@ -134,3 +134,27 @@ div.author-table {
     height: 90vh;
     overflow-y: auto;
 }
+/* ---------------end author table------------- */
+
+/* ----------footer--------- */
+footer{
+    height: 25vh;
+    background-color: rgb(255, 255, 255);
+}
+footer a {
+    font-size: 1.4rem;
+    padding: 0.6rem;
+}
+.fa-facebook-f:hover {
+    color: rgb(0, 0, 255);
+}
+.fa-instagram:hover{
+    color: rgb(246, 80, 246);
+}
+.fa-twitter:hover {
+    color: rgb(135, 206, 235);
+}
+.fa-github:hover {
+    color: rgb(39, 35, 46);
+}
+/* ----------end footer--------- */

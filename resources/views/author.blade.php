@@ -16,11 +16,11 @@
     <table class="table table-bordered border-warning table-light caption-top table-responsive table-hover table-striped align-middle">
         <tbody>
             <tr>
-                <th>Authors</th>
+                <th class="fs-5">Authors</th>
             </tr>
             @foreach($authors as $author)
             <tr>
-                <td>{{ $author->name }}</td>
+                <td><a href="{{ route('author-book', [$author->id]) }}" class="text-decoration-none">{{ $author->name }}</a></td>
             </tr>
             @endforeach
         </tbody>

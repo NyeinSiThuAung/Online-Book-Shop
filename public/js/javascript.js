@@ -51,7 +51,7 @@ function addToCartLocalStorageReuseFunction(param){
     let createdImgDiv = addToCartReuseFunction("createImgDiv", "div", "col-3", createdRowDiv);
 
     let createdImgTag = addToCartReuseFunction("createImgTag", "img", "addedCartImg", createdImgDiv);
-    createdImgTag.src = "images/" + localStorage.getItem('image'+param);
+    createdImgTag.src = "/images/" + localStorage.getItem('image'+param);
     createdImgTag.width = "100";
     
     let createdTitleDiv = addToCartReuseFunction("createTitleDiv", "div", "col-8", createdRowDiv);
@@ -99,7 +99,7 @@ document.getElementsByClassName('asideLeft')[0].addEventListener('click',quitSho
 
 // End Cart
 
-// showImg in crete and edit file
+// ShowImg in crete and edit file input
 function CreateImg(data){
     let newPhoto = document.getElementById('newPhoto');
     if (data.files && data.files[0]) {
@@ -112,4 +112,19 @@ function CreateImg(data){
         reader.readAsDataURL(data.files[0]);
     }
 }
+
+// End ShowImg
+
+// Animation
+let carouselImgStyle = document.querySelectorAll('.carousel-img-style'); 
+for(let i = 0; i < carouselImgStyle.length; i++){
+    carouselImgStyle[i].addEventListener('mouseenter', () => {
+        document.getElementsByClassName('carousel-img-style')[i].classList.add('animate__animated','animate__pulse','animate__fast');
+    })
+    carouselImgStyle[i].addEventListener('mouseleave', () => {
+        document.getElementsByClassName('carousel-img-style')[i].classList.remove('animate__animated','animate__pulse','animate__fast');
+    })
+}
+
+// End Animation
   

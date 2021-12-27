@@ -18,7 +18,7 @@ class ViewOrderController extends Controller
         ->groupBy('order_id');
         $status = config('orderstatus');
         // dd($status);
-        return view('viewOrder',compact('orders', 'status'));
+        return view('view_order',compact('orders', 'status'));
     }
 
     public function approve($id)

@@ -16,11 +16,11 @@
     <table class="table table-bordered border-warning table-light caption-top table-responsive table-hover table-striped align-middle">
         <tbody>
             <tr>
-                <th>Categories</th>
+                <th class="fs-5">Categories</th>
             </tr>
             @foreach($categories as $category)
             <tr>
-                <td>{{ $category->name }}</td>
+                <td><a href="{{ route('category-book', [$category->id]) }}" class="text-decoration-none">{{ $category->name }}</a></td>
             </tr>
             @endforeach
         </tbody>

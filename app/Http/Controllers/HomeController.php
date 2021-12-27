@@ -56,7 +56,14 @@ class HomeController extends Controller
         return view('author', compact('authors'));
     }
     
-    
+    public function authorBook ($id) 
+    {
+        $author = Author::find($id);
+        $books = $author->books;
+        // dd($books);
+        return view('author_book', compact('books'));
+    }
+
     public function category () 
     {
         $categories = Category::orderBy('name')->get();
@@ -67,6 +74,14 @@ class HomeController extends Controller
     {
         $categories = Category::orderBy('name','desc')->get();
         return view('category', compact('categories'));
+    }
+    
+    public function cateBook ($id) 
+    {
+        $category = Category::find($id);
+        $books = $category->books;
+        // dd($books);
+        return view('category_book', compact('books'));
     }
 
     public function search (Request $request) 

@@ -26,11 +26,15 @@ Route::get('/all-view-more', [App\Http\Controllers\HomeController::class, 'allVi
 
 Route::get('/authors', [App\Http\Controllers\HomeController::class, 'author'])->name('author');
 
+Route::get('/author-book/{id}', [App\Http\Controllers\HomeController::class, 'authorBook'])->name('author-book');
+
 Route::get('/desc-authors', [App\Http\Controllers\HomeController::class, 'authordesc'])-> name('authordesc');
 
 Route::get('/categories', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
 
 Route::get('/desc-categories', [App\Http\Controllers\HomeController::class, 'categorydesc'])-> name('categorydesc');
+
+Route::get('/category-book/{id}', [App\Http\Controllers\HomeController::class, 'cateBook'])->name('category-book');
 
 Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])-> name('search');
 
@@ -55,7 +59,7 @@ Auth::routes(['reset' => false]);
 // cart
 
 Route::get('/cart-item-order',function() {
-    return view('order.cartItemOrder');
+    return view('order.cart_item_order');
 })->name('cartItemOrder');
 
 // end

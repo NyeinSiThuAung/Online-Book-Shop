@@ -93,7 +93,7 @@
 </div>
 </header>
 <main class="container" id="navScrollWp">
-  <div class="popularBooks">
+  <div class="recentUpload">
     <h2 class="text-center pt-4">Recently Uploaded Books</h2>
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
       <div class="carousel-inner">
@@ -163,7 +163,7 @@
   </div>
 <!-- All -->
   
-<div class="popularBooks">
+<div class="allBook">
     <h2 class="text-center pt-4">All Books</h2>
     <div id="carouselExampleControlsNoTouching2" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
       <div class="carousel-inner">
@@ -232,6 +232,24 @@
     <div class="text-center"><a href="{{ route('allViewMore') }}" class="btn btn-warning mb-4">View More</a></div>
   </div>
 </main>
+<footer>
+  <div class="container">
+  <div class="row pt-4">
+    <div class="col-6">
+      <a href="">About me</a>
+      <a href="">Blog</a>
+      <a href="">Contact me</a>
+    </div>
+    <div class="col-5 text-end">
+      <a href="https://www.facebook.com/profile.php?id=100004579908057" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/rei_20125/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com/rai_2_1" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://github.com/NyeinSiThuAung" target="_blank"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+  <a class="text-center d-block mt-3"><i><i class="fas fa-phone"></i></i>  +959767135937</a>
+  </div>
+</footer>
 <script src="/js/waypoint.js"></script>
 <script src="/js/javascript.js"></script>
 </body>

@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
     public function index (Request $addedItems) {
         $addedItems = $addedItems->except('_token');
-        return view('order.orderRegister',compact('addedItems'));
+        return view('order.order_register',compact('addedItems'));
     }
 
     public function store(Request $request){
